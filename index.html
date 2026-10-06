@@ -117,24 +117,38 @@
             </p>
 
 
-            <div class="location-search">
+                    <div class="location-search">
 
-                <span class="location-icon">
-                    📍
-                </span>
+            <span class="location-icon">
+                📍
+            </span>
 
+            <div class="location-input-wrapper">
 
                 <input
                     type="text"
+                    id="homeLocation"
                     placeholder="Enter your location"
+                    autocomplete="off"
                 >
 
-
-                <button>
-                    Search
-                </button>
+                <div
+                    id="locationSuggestions"
+                    class="location-suggestions">
+                </div>
 
             </div>
+
+            <button
+                id="homeSearchButton"
+                disabled
+                onclick="searchFromHome()">
+
+                Search
+
+            </button>
+
+        </div>
 
         </div>
 
@@ -168,97 +182,92 @@
         <div class="sports-container">
 
 
-            <div class="sport-card">
+            <div
+    class="sport-card"
+    onclick="selectSport('Pickleball', this)">
 
-                <img
-                    src="images/pickleball.jpg"
-                    alt="Pickleball"
-                >
+    <img
+        src="images/pickleball.jpg"
+        alt="Pickleball"
+    >
 
-                <div class="sport-card-overlay">
+    <div class="sport-card-overlay">
+        <span>
+            Pickleball
+        </span>
+    </div>
 
-                    <span>
-                        Pickleball
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="sport-card">
-
-                <img
-                    src="images/basketball.jpg"
-                    alt="Basketball"
-                >
-
-                <div class="sport-card-overlay">
-
-                    <span>
-                        Basketball
-                    </span>
-
-                </div>
-
-            </div>
+</div>
 
 
-            <div class="sport-card">
+            <div
+    class="sport-card"
+    onclick="selectSport('Basketball', this)">
 
-                <img
-                    src="images/tennis.jpg"
-                    alt="Tennis"
-                >
+    <img
+        src="images/basketball.jpg"
+        alt="Basketball"
+    >
 
-                <div class="sport-card-overlay">
+    <div class="sport-card-overlay">
+        <span>
+            Basketball
+        </span>
+    </div>
 
-                    <span>
-                        Tennis
-                    </span>
+</div>
 
-                </div>
+<div
+    class="sport-card"
+    onclick="selectSport('Tennis', this)">
 
-            </div>
+    <img
+        src="images/tennis.jpg"
+        alt="Tennis"
+    >
 
+    <div class="sport-card-overlay">
+        <span>
+            Tennis
+        </span>
+    </div>
 
-            <div class="sport-card">
+</div>
 
-                <img
-                    src="images/volleyball.jpg"
-                    alt="Volleyball"
-                >
+            <div
+    class="sport-card"
+    onclick="selectSport('Volleyball', this)">
 
-                <div class="sport-card-overlay">
+    <img
+        src="images/volleyball.jpg"
+        alt="Volleyball"
+    >
 
-                    <span>
-                        Volleyball
-                    </span>
+    <div class="sport-card-overlay">
+        <span>
+            Volleyball
+        </span>
+    </div>
 
-                </div>
-
-            </div>
-
-
-            <div class="sport-card">
-
-                <img
-                    src="images/badminton.jpg"
-                    alt="Badminton"
-                >
-
-                <div class="sport-card-overlay">
-
-                    <span>
-                        Badminton
-                    </span>
-
-                </div>
-
-            </div>
+</div>
 
 
-        </div>
+            <div
+    class="sport-card"
+    onclick="selectSport('Badminton', this)">
+
+    <img
+        src="images/badminton.jpg"
+        alt="Badminton"
+    >
+
+    <div class="sport-card-overlay">
+        <span>
+            Badminton
+        </span>
+    </div>
+
+</div>
 
     </section>
 
@@ -410,7 +419,286 @@
     </section>
 
 
+<script>
 
+    /* =========================
+       HOME PAGE SEARCH
+    ========================== */
+
+    let selectedSport = "";
+
+
+    /*
+     * Location suggestions
+     */
+
+    const locations = [
+
+        "Cabuyao, Laguna",
+
+        "Santa Rosa, Laguna",
+
+        "Calamba, Laguna",
+
+        "Biñan, Laguna",
+
+        "San Pedro, Laguna",
+
+        "Muntinlupa",
+
+        "Las Piñas",
+
+        "Makati",
+
+        "Quezon City",
+
+        "Manila"
+
+    ];
+
+
+    const locationInput =
+        document.getElementById("homeLocation");
+
+    const suggestionBox =
+        document.getElementById("locationSuggestions");
+
+
+    locationInput.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                this.value.trim().toLowerCase();
+
+
+            suggestionBox.innerHTML = "";
+
+
+            if (value === "") {
+
+                suggestionBox.style.display = "none";
+
+                return;
+
+            }
+
+
+            const matches =
+                locations.filter(
+                    function(location) {
+
+                        return location
+                            .toLowerCase()
+                            .includes(value);
+
+                    }
+                );
+
+
+            if (matches.length === 0) {
+
+                suggestionBox.style.display = "none";
+
+                return;
+
+            }
+
+
+            matches.forEach(
+                function(location) {
+
+                    const suggestion =
+                        document.createElement("div");
+
+                    suggestion.className =
+                        "location-suggestion";
+
+                    suggestion.textContent =
+                        "📍 " + location;
+
+
+                    suggestion.onclick =
+                        function() {
+
+                            locationInput.value =
+                                location;
+
+                            suggestionBox.style.display =
+                                "none";
+
+                        };
+
+
+                    suggestionBox.appendChild(
+                        suggestion
+                    );
+
+                }
+            );
+
+
+            suggestionBox.style.display =
+                "block";
+
+        }
+    );
+
+
+    /*
+     * Select a sport
+     */
+
+    function selectSport(
+        sport,
+        card
+    ) {
+
+        selectedSport = sport;
+
+
+        /*
+         * Remove selection
+         * from all sport cards
+         */
+
+        document
+            .querySelectorAll(".sport-card")
+            .forEach(
+                function(item) {
+
+                    item.classList.remove(
+                        "selected"
+                    );
+
+                }
+            );
+
+
+        /*
+         * Highlight selected sport
+         */
+
+        card.classList.add("selected");
+
+
+        /*
+         * Enable search button
+         */
+
+        document.getElementById(
+            "homeSearchButton"
+        ).disabled = false;
+
+    }
+
+
+    /*
+     * Search from Home page
+     */
+
+    function searchFromHome() {
+
+        const location =
+            locationInput.value.trim();
+
+
+        /*
+         * Sport must be selected
+         */
+
+        if (!selectedSport) {
+
+            alert(
+                "Please select a sport first."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Location must be entered
+         */
+
+        if (!location) {
+
+            alert(
+                "Please enter your location."
+            );
+
+            locationInput.focus();
+
+            return;
+
+        }
+
+
+        /*
+         * Send location and sport
+         * to Find a Court page
+         */
+
+        const url =
+            "pages/find-court.html" +
+            "?location=" +
+            encodeURIComponent(location) +
+            "&sport=" +
+            encodeURIComponent(selectedSport);
+
+
+        window.location.href = url;
+
+    }
+
+
+    /*
+     * Allow Enter key
+     */
+
+    locationInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                searchFromHome();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Close suggestions when
+     * clicking outside
+     */
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                !event.target.closest(
+                    ".location-input-wrapper"
+                )
+            ) {
+
+                suggestionBox.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+</script>
+
+<script src="auth.js"></script>
     <script src="auth.js"></script>
 
 </body>

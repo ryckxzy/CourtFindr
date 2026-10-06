@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Find a Court - CourtFindr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+<link rel="stylesheet" href="../style.css">
+
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+</head>
+<body class="find-court-page">
+
+    <header class="navbar">
+
+        <div class="logo">
+    <img
+        src="../images/courtfindr-logo.png"
+        alt="CourtFindr"
+    >
+</div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="find-court.html"
+               class="active">
+                Find a Court
+            </a>
+
+            <a href="freeplay.html">
+                FreePlay
+            </a>
+
+            <a href="#">
+                Facilities
+            </a>
+
+        </nav>
+
+        <div class="auth-buttons">
+
+            <button
+                class="login-btn"
+                onclick="window.location.href='login.html'">
+                Log In
+            </button>
+
+            <button
+                class="signup-btn"
+                onclick="window.location.href='signup.html'">
+                Sign Up
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="find-court-page">
+
+        <h1>Find a Court</h1>
+
+        <p>
+            Find sports courts near you.
+        </p>
+
+
+        <div class="search-options">
+
+            <div class="location-search">
+
+                <input
+                    type="text"
+                    id="location-input"
+                    placeholder="Enter location"
+                    autocomplete="off"
+                >
+
+                <select id="sport-select">
+
+                    <option>All Sports</option>
+
+                    <option>Pickleball</option>
+
+                    <option>Basketball</option>
+
+                    <option>Tennis</option>
+
+                    <option>Volleyball</option>
+
+                    <option>Badminton</option>
+
+                </select>
+
+                <button onclick="searchCourts()">
+                    Search
+                </button>
+
+                <div id="location-suggestions"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="court-results">
+
+            <div id="court-list">
+
+                <h2>Nearby Courts</h2>
+
+            </div>
+
+
+            <div id="map"></div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Leaflet -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <!-- Court data MUST load before the main script -->
+
+    <script src="../court-data.js"></script>
+
+
+    <script>
+
+        /* =====================================================
+           MAP
+           ===================================================== */
+
+        const map =
+            L.map('map')
+             .setView(
+                [14.2691, 121.4113],
+                13
+             );
+
+
+        L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution:
+                    '&copy; OpenStreetMap contributors'
+            }
+        ).addTo(map);
+
+
+
+        /* =====================================================
+           USER LOCATION
+           ===================================================== */
+
+        let userLocation = null;
+
+        let searchLocationMarker = null;
+
+        let markers = [];
+
+
+
+        map.locate({
+
+            setView: false,
+
+            enableHighAccuracy: true
+
+        });
+
+
+
+        map.on(
+            'locationfound',
+            function(e) {
+
+                userLocation = {
+
+                    lat: e.latlng.lat,
+
+                    lng: e.latlng.lng
+
+                };
+
+
+                const userMarker =
+                    L.marker(e.latlng)
+                        .addTo(map)
+                        .bindPopup("📍 You are here")
+                        .openPopup();
+
+
+                showCourts(
+                    document.getElementById(
+                        "sport-select"
+                    ).value
+                );
+
+            }
+        );
+
+
+
+        map.on(
+            'locationerror',
+            function(e) {
+
+                alert(
+                    "Unable to find your location. Please allow location access."
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           DISTANCE CALCULATION
+           ===================================================== */
+
+        function calculateDistance(
+            lat1,
+            lon1,
+            lat2,
+            lon2
+        ) {
+
+            const R = 6371;
+
+
+            const dLat =
+                (lat2 - lat1)
+                * Math.PI / 180;
+
+
+            const dLon =
+                (lon2 - lon1)
+                * Math.PI / 180;
+
+
+            const a =
+
+                Math.sin(dLat / 2)
+                * Math.sin(dLat / 2)
+
+                +
+
+                Math.cos(
+                    lat1 * Math.PI / 180
+                )
+
+                *
+
+                Math.cos(
+                    lat2 * Math.PI / 180
+                )
+
+                *
+
+                Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+
+
+            const c =
+
+                2 *
+
+                Math.atan2(
+
+                    Math.sqrt(a),
+
+                    Math.sqrt(1 - a)
+
+                );
+
+
+            return R * c;
+
+        }
+
+
+
+        /* =====================================================
+           LOCATION SEARCH SUGGESTIONS
+           ===================================================== */
+
+        let selectedLocation = null;
+
+        let suggestionTimer = null;
+
+
+        const locationInput =
+            document.getElementById(
+                "location-input"
+            );
+
+
+        const suggestionBox =
+            document.getElementById(
+                "location-suggestions"
+            );
+
+
+
+        locationInput.addEventListener(
+            "input",
+            function() {
+
+                clearTimeout(
+                    suggestionTimer
+                );
+
+
+                const query =
+                    this.value.trim();
+
+
+                selectedLocation = null;
+
+
+                if (query.length < 3) {
+
+                    suggestionBox.style.display =
+                        "none";
+
+                    suggestionBox.innerHTML =
+                        "";
+
+                    return;
+
+                }
+
+
+                suggestionTimer =
+                    setTimeout(
+                        function() {
+
+                            getLocationSuggestions(
+                                query
+                            );
+
+                        },
+                        1000
+                    );
+
+            }
+        );
+
+
+
+        async function getLocationSuggestions(
+            query
+        ) {
+
+            try {
+
+                const url =
+
+                    "https://nominatim.openstreetmap.org/search" +
+
+                    "?format=json" +
+
+                    "&q=" +
+                    encodeURIComponent(query) +
+
+                    "&countrycodes=ph" +
+
+                    "&limit=5" +
+
+                    "&addressdetails=1";
+
+
+                const response =
+                    await fetch(url);
+
+
+                const data =
+                    await response.json();
+
+
+                suggestionBox.innerHTML =
+                    "";
+
+
+                if (data.length === 0) {
+
+                    suggestionBox.innerHTML = `
+
+                        <div class="location-suggestion">
+
+                            No locations found in the Philippines.
+
+                        </div>
+
+                    `;
+
+
+                    suggestionBox.style.display =
+                        "block";
+
+
+                    return;
+
+                }
+
+
+
+                data.forEach(
+                    function(place) {
+
+                        const suggestion =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        suggestion.className =
+                            "location-suggestion";
+
+
+                        const mainName =
+
+                            place.name ||
+
+                            place.display_name
+                                .split(",")[0];
+
+
+                        suggestion.innerHTML = `
+
+                            <div class="suggestion-name">
+
+                                📍 ${mainName}
+
+                            </div>
+
+
+                            <div class="suggestion-address">
+
+                                ${place.display_name}
+
+                            </div>
+
+                        `;
+
+
+                        suggestion.addEventListener(
+                            "click",
+                            function() {
+
+                                locationInput.value =
+                                    place.display_name;
+
+
+                                selectedLocation = {
+
+                                    lat:
+                                        parseFloat(
+                                            place.lat
+                                        ),
+
+                                    lng:
+                                        parseFloat(
+                                            place.lon
+                                        ),
+
+                                    name:
+                                        place.display_name
+
+                                };
+
+
+                                suggestionBox.innerHTML =
+                                    "";
+
+
+                                suggestionBox.style.display =
+                                    "none";
+
+
+                                map.setView(
+
+                                    [
+                                        selectedLocation.lat,
+                                        selectedLocation.lng
+                                    ],
+
+                                    15
+
+                                );
+
+                            }
+                        );
+
+
+                        suggestionBox.appendChild(
+                            suggestion
+                        );
+
+                    }
+                );
+
+
+                suggestionBox.style.display =
+                    "block";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Location suggestion error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           COURT LIST
+           ===================================================== */
+
+        function updateCourtList(
+            sport,
+            userLat,
+            userLng
+        ) {
+
+            const courtList =
+                document.getElementById(
+                    "court-list"
+                );
+
+
+            courtList.innerHTML =
+    "<h2>Nearby Courts</h2>";
+
+
+const radius = 10;
+
+let nearbyCount = 0;
+
+
+courtData.forEach(
+    function(court) {
+
+        /*
+         * Skip courts without coordinates.
+         */
+        if (
+            court.latitude === null ||
+            court.longitude === null
+        ) {
+            return;
+        }
+
+
+        const distance =
+            calculateDistance(
+                userLat,
+                userLng,
+                Number(court.latitude),
+                Number(court.longitude)
+            );
+
+
+        /*
+         * Show only courts within 10 km
+         * and matching the selected sport.
+         */
+        if (
+            distance <= radius &&
+            (
+                sport === "All Sports" ||
+                court.sport === sport
+            )
+        ) {
+
+            nearbyCount++;
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "court-card";
+
+
+            /*
+             * Only registered facilities
+             * can be booked.
+             */
+            let bookingButton = "";
+
+
+            if (
+                court.registered === true
+            ) {
+
+                bookingButton = `
+                    <button
+                        onclick="bookCourt('${court.id}')">
+                        Book a Court
+                    </button>
+                `;
+
+            }
+
+
+            /*
+             * Create the court card.
+             */
+            card.innerHTML = `
+
+                <div class="court-card-content">
+
+                    <h3>
+                        ${court.facility}
+                    </h3>
+
+                    <p>
+                        <strong>Sport:</strong>
+                        ${court.sport}
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        ${court.location}
+                    </p>
+
+                    <p>
+                        <strong>Operating Hours:</strong>
+                        ${court.operatingHours}
+                    </p>
+
+                    <p>
+                        <strong>Distance:</strong>
+                        ${distance.toFixed(1)} km away
+                    </p>
+
+                    ${
+                        court.price
+                            ? `
+                                <p>
+                                    <strong>Price:</strong>
+                                    ${court.price}
+                                </p>
+                              `
+                            : ""
+                    }
+
+                    ${
+                        court.contact
+                            ? `
+                                <p>
+                                    <strong>Contact:</strong>
+                                    ${court.contact}
+                                </p>
+                              `
+                            : ""
+                    }
+
+                    <div class="court-card-buttons">
+
+                        <button
+                            onclick="viewCourt('${court.id}')">
+                            View Court
+                        </button>
+
+                        ${bookingButton}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            /*
+             * IMPORTANT:
+             * Actually add the card to
+             * the Nearby Courts section.
+             */
+            courtList.appendChild(card);
+
+        }
+
+    }
+);
+
+
+/*
+ * If no courts match the search,
+ * show a message instead.
+ */
+if (nearbyCount === 0) {
+
+    const noCourts =
+        document.createElement("p");
+
+
+    noCourts.className =
+        "no-courts";
+
+
+    noCourts.textContent =
+        "No courts found within 10 km of this location.";
+
+
+    courtList.appendChild(noCourts);
+
+}
+
+                }
+    
+
+
+        /* =====================================================
+           SHOW COURTS ON MAP
+           ===================================================== */
+
+        function showCourts(
+            sport,
+            searchLat = null,
+            searchLng = null
+        ) {
+
+
+            /*
+             * Remove old markers.
+             */
+
+            markers.forEach(
+                function(marker) {
+
+                    map.removeLayer(
+                        marker
+                    );
+
+                }
+            );
+
+
+            markers = [];
+
+
+
+            /*
+             * Add matching court markers.
+             */
+
+            courtData.forEach(
+                function(court) {
+
+
+                    /*
+                     * Don't attempt to place
+                     * a marker without coordinates.
+                     */
+
+                    if (
+                        court.latitude === null ||
+                        court.longitude === null
+                    ) {
+
+                        return;
+
+                    }
+
+
+
+                    if (
+
+                        sport === "All Sports" ||
+
+                        court.sport === sport
+
+                    ) {
+
+
+                        const marker =
+                            L.marker([
+
+                                court.latitude,
+
+                                court.longitude
+
+                            ]).addTo(map);
+
+
+
+                        /*
+                         * Booking button only
+                         * appears in popup if
+                         * facility is registered.
+                         */
+
+                        let bookingButton = "";
+
+
+                        if (
+                            court.registered === true
+                        ) {
+
+                            bookingButton = `
+
+                                <br>
+
+                                <button
+                                    onclick="bookCourt('${court.id}')">
+
+                                    Book a Court
+
+                                </button>
+
+                            `;
+
+                        }
+
+
+
+                        marker.bindPopup(`
+
+                            <strong>
+                                ${court.facility}
+                            </strong>
+
+                            <br>
+
+                            Sport:
+                            ${court.sport}
+
+                            <br>
+
+                            Hours:
+                            ${court.operatingHours}
+
+                            <br>
+
+                            Contact:
+                            ${court.contact}
+
+                            <br><br>
+
+
+                            <button
+                                onclick="viewCourt('${court.id}')">
+
+                                View Court
+
+                            </button>
+
+
+                            <button
+                                onclick="getDirections(
+                                    ${court.latitude},
+                                    ${court.longitude}
+                                )">
+
+                                Get Directions
+
+                            </button>
+
+                            ${bookingButton}
+
+                        `);
+
+
+                        markers.push(
+                            marker
+                        );
+
+                    }
+
+                }
+            );
+
+
+
+            /*
+             * Determine reference location.
+             */
+
+            const referenceLat =
+
+                searchLat !== null
+
+                    ? searchLat
+
+                    : userLocation?.lat;
+
+
+
+            const referenceLng =
+
+                searchLng !== null
+
+                    ? searchLng
+
+                    : userLocation?.lng;
+
+
+
+            if (
+
+                referenceLat !== undefined &&
+
+                referenceLng !== undefined
+
+            ) {
+
+                updateCourtList(
+
+                    sport,
+
+                    referenceLat,
+
+                    referenceLng
+
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           VIEW COURT
+           ===================================================== */
+
+        function viewCourt(
+            courtId
+        ) {
+
+
+            const court =
+                courtData.find(
+                    function(court) {
+
+                        return court.id === courtId;
+
+                    }
+                );
+
+
+            if (!court) {
+
+                return;
+
+            }
+
+
+
+            const params =
+                new URLSearchParams();
+
+
+            params.set(
+                "court",
+                court.facility
+            );
+
+
+            params.set(
+                "sport",
+                court.sport
+            );
+
+
+            params.set(
+                "location",
+                court.location
+            );
+
+
+            params.set(
+                "hours",
+                court.operatingHours
+            );
+
+
+            params.set(
+                "contact",
+                court.contact
+            );
+
+
+            params.set(
+                "registered",
+                court.registered
+            );
+
+
+            /*
+             * Include coordinates when
+             * they exist.
+             */
+
+            if (
+                court.latitude !== null &&
+                court.longitude !== null
+            ) {
+
+                params.set(
+                    "lat",
+                    court.latitude
+                );
+
+
+                params.set(
+                    "lng",
+                    court.longitude
+                );
+
+            }
+
+
+
+            window.location.href =
+
+                "court-details.html?" +
+
+                params.toString();
+
+        }
+
+
+
+        /* =====================================================
+           BOOK COURT
+           ===================================================== */
+
+        function bookCourt(
+            courtId
+        ) {
+
+
+            const court =
+                courtData.find(
+                    function(court) {
+
+                        return court.id === courtId;
+
+                    }
+                );
+
+
+            if (!court) {
+
+                return;
+
+            }
+
+
+
+            /*
+             * Extra protection:
+             * unregistered courts can
+             * NEVER be booked.
+             */
+
+            if (
+                court.registered !== true
+            ) {
+
+                alert(
+                    "This court is not available for booking through CourtFindr."
+                );
+
+                return;
+
+            }
+
+
+
+            const params =
+                new URLSearchParams();
+
+
+            params.set(
+                "court",
+                court.facility
+            );
+
+
+            params.set(
+                "sport",
+                court.sport
+            );
+
+
+            params.set(
+                "location",
+                court.location
+            );
+
+
+
+            window.location.href =
+
+                "book-court.html?" +
+
+                params.toString();
+
+        }
+
+
+
+        /* =====================================================
+           INITIAL LOAD
+           ===================================================== */
+
+        /* =====================================================
+   INITIAL LOAD FROM HOME PAGE
+   ===================================================== */
+
+const homeParams =
+    new URLSearchParams(window.location.search);
+
+const homeLocation =
+    homeParams.get("location");
+
+const homeSport =
+    homeParams.get("sport");
+
+
+if (homeLocation) {
+
+    document.getElementById(
+        "location-input"
+    ).value = homeLocation;
+
+}
+
+
+if (homeSport) {
+
+    const sportSelect =
+        document.getElementById(
+            "sport-select"
+        );
+
+    sportSelect.value = homeSport;
+
+}
+
+
+/*
+ * If Home sent both a location
+ * and a sport, automatically search.
+ */
+
+if (
+    homeLocation &&
+    homeSport
+) {
+
+    searchCourts();
+
+} else {
+
+    /*
+     * Normal Find a Court visit
+     * with no Home-page search.
+     */
+
+    showCourts("All Sports");
+
+}
+
+
+
+        /* =====================================================
+           SEARCH COURTS
+           ===================================================== */
+
+        async function searchCourts() {
+
+
+            const locationInput =
+
+                document
+                    .getElementById(
+                        "location-input"
+                    )
+                    .value
+                    .trim();
+
+
+            const sport =
+
+                document
+                    .getElementById(
+                        "sport-select"
+                    )
+                    .value;
+
+
+
+            if (
+                locationInput === ""
+            ) {
+
+                alert(
+                    "Please enter a location."
+                );
+
+                return;
+
+            }
+
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+
+                        "https://nominatim.openstreetmap.org/search" +
+
+                        "?format=json" +
+
+                        "&q=" +
+
+                        encodeURIComponent(
+                            locationInput
+                        ) +
+
+                        "&countrycodes=ph" +
+
+                        "&limit=1"
+
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+
+                if (
+                    data.length === 0
+                ) {
+
+                    alert(
+                        "Location not found in the Philippines."
+                    );
+
+                    return;
+
+                }
+
+
+
+                const latitude =
+
+                    parseFloat(
+                        data[0].lat
+                    );
+
+
+                const longitude =
+
+                    parseFloat(
+                        data[0].lon
+                    );
+
+
+
+                console.log(
+                    "Searched location:",
+                    latitude,
+                    longitude
+                );
+
+
+
+                /*
+                 * Move map to searched location.
+                 */
+
+                map.setView(
+
+                    [
+                        latitude,
+                        longitude
+                    ],
+
+                    15
+
+                );
+
+
+
+                /*
+                 * Remove previous
+                 * search marker.
+                 */
+
+                if (
+                    searchLocationMarker
+                ) {
+
+                    map.removeLayer(
+                        searchLocationMarker
+                    );
+
+                }
+
+
+
+                searchLocationMarker =
+
+                    L.marker([
+
+                        latitude,
+
+                        longitude
+
+                    ])
+
+                    .addTo(map)
+
+                    .bindPopup(
+                        "📍 Searched Location"
+                    )
+
+                    .openPopup();
+
+
+
+                /*
+                 * Show courts within
+                 * 10 km.
+                 */
+
+                showCourts(
+
+                    sport,
+
+                    latitude,
+
+                    longitude
+
+                );
+
+
+
+                /*
+                 * Hide suggestions.
+                 */
+
+                if (
+                    suggestionBox
+                ) {
+
+                    suggestionBox.style.display =
+                        "none";
+
+                }
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Search error:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to search for this location."
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           DIRECTIONS
+           ===================================================== */
+
+        function getDirections(
+            lat,
+            lng
+        ) {
+
+
+            const googleMapsURL =
+
+                "https://www.google.com/maps/dir/?api=1&destination="
+
+                + lat
+
+                + ","
+
+                + lng;
+
+
+            window.open(
+                googleMapsURL,
+                "_blank"
+            );
+
+        }
+
+    </script>
+
+
+    <!-- AUTH -->
+
+    <script src="../auth.js"></script>
+
+
+</body>
+
+</html>
