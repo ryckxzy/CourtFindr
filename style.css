@@ -3351,3 +3351,167 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 }   
+/* =========================
+   HOME PAGE SEARCH
+========================= */
+
+.location-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.location-input-wrapper input {
+    width: 100%;
+}
+
+
+/* LOCATION SUGGESTIONS */
+
+.location-suggestions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 1000;
+    display: none;
+}
+
+.location-suggestion {
+    padding: 12px 16px;
+    cursor: pointer;
+    color: #34402c;
+    background: white;
+}
+
+.location-suggestion:hover {
+    background: #f3f1e8;
+}
+
+
+/* SELECTED SPORT */
+
+.sport-card {
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.sport-card.selected {
+    outline: 4px solid #46553a;
+    outline-offset: 3px;
+    transform: translateY(-3px);
+}
+
+
+/* DISABLED SEARCH BUTTON */
+
+#homeSearchButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#homeSearchButton:not(:disabled) {
+    cursor: pointer;
+}
+/* =====================================================
+   FIND A COURT - LAYOUT FIX
+   ===================================================== */
+
+
+/* =========================
+   FULL-WIDTH NAVBAR
+========================= */
+
+body.find-court-page .navbar {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+body.find-court-page .search-options {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+body.find-court-page .location-search {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+/* Location input */
+
+body.find-court-page #location-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+
+    box-sizing: border-box;
+}
+
+
+/* Sport dropdown */
+
+body.find-court-page #sport-select {
+    flex: 0 0 150px;
+    width: 150px;
+
+    box-sizing: border-box;
+}
+
+
+/* Search button */
+
+body.find-court-page .location-search > button {
+    flex: 0 0 90px;
+    width: 90px;
+    min-width: 90px;
+
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+
+/* Make sure the suggestion box
+   does not affect the search bar width */
+
+body.find-court-page #location-suggestions {
+    position: absolute;
+}
+body.find-court-page #sport-select {
+    margin-right: 8px;
+}
+body.find-court-page .navbar {
+    width: 100vw;
+    max-width: none;
+
+    margin-top: 0 !important;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    box-sizing: border-box;
+}
+body.find-court-page {
+    margin: 0;
+}
+body.find-court-page {
+    margin: 0 !important;
+    padding-top: 0 !important;
+}
