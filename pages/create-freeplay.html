@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create FreePlay - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="find-court.html">Find a Court</a>
+            <a href="freeplay.html">FreePlay</a>
+            <a href="#">Facilities</a>
+        </nav>
+
+    </header>
+
+
+    <main class="auth-page">
+
+    <div class="auth-card">
+
+        <h1>Create FreePlay</h1>
+
+        <p>
+            Create a game and invite players to join.
+        </p>
+
+
+        <form id="create-freeplay-form">
+
+            <label for="game-title">
+                Game Title
+            </label>
+
+            <input
+                type="text"
+                id="game-title"
+                placeholder="e.g. Saturday Basketball"
+                required
+            >
+
+
+            <label for="game-sport">
+                Sport
+            </label>
+
+            <select
+                id="game-sport"
+                required>
+
+                <option value="">
+                    Select a sport
+                </option>
+
+                <option value="Basketball">
+                    Basketball
+                </option>
+
+                <option value="Pickleball">
+                    Pickleball
+                </option>
+
+                <option value="Tennis">
+                    Tennis
+                </option>
+
+                <option value="Volleyball">
+                    Volleyball
+                </option>
+
+                <option value="Badminton">
+                    Badminton
+                </option>
+
+            </select>
+
+
+            <label for="game-date">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="game-date"
+                required
+            >
+
+
+            <label for="game-start">
+                Start Time
+            </label>
+
+            <input
+                type="time"
+                id="game-start"
+                required
+            >
+
+
+            <label for="game-end">
+                End Time
+            </label>
+
+            <input
+                type="time"
+                id="game-end"
+                required
+            >
+
+
+            <label for="game-location">
+                Location
+            </label>
+
+            <input
+                type="text"
+                id="game-location"
+                placeholder="Enter location"
+                required
+            >
+
+
+            <label for="game-level">
+                Skill Level
+            </label>
+
+            <select
+                id="game-level"
+                required>
+
+                <option value="">
+                    Select level
+                </option>
+
+                <option value="Any Level">
+                    Any Level
+                </option>
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+
+
+            <label for="game-players">
+                Maximum Players
+            </label>
+
+            <input
+                type="number"
+                id="game-players"
+                min="2"
+                max="20"
+                placeholder="e.g. 4"
+                required
+            >
+
+
+            <label for="game-description">
+                Description
+            </label>
+
+            <textarea
+                id="game-description"
+                placeholder="Tell players about your game..."
+                rows="4">
+            </textarea>
+
+
+            <button
+                type="submit"
+                class="auth-submit-btn">
+
+                Create Game
+
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+    <script src="../auth.js"></script>
+<script>
+
+document
+    .getElementById("create-freeplay-form")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const plan =
+            localStorage.getItem("courtfindrPlan");
+
+        const loggedIn =
+            localStorage.getItem("courtfindrLoggedIn");
+
+
+        if (
+            loggedIn !== "true" ||
+            plan !== "playplus"
+        ) {
+
+            alert(
+                "Creating FreePlay games is available to Play+ members."
+            );
+
+            return;
+
+        }
+
+
+        const game = {
+
+            title:
+                document.getElementById("game-title").value.trim(),
+
+            sport:
+                document.getElementById("game-sport").value,
+
+            date:
+                document.getElementById("game-date").value,
+
+            startTime:
+                document.getElementById("game-start").value,
+
+            endTime:
+                document.getElementById("game-end").value,
+
+            location:
+                document.getElementById("game-location").value.trim(),
+
+            level:
+                document.getElementById("game-level").value,
+
+            maxPlayers:
+                document.getElementById("game-players").value,
+
+            description:
+                document.getElementById("game-description").value.trim(),
+
+            creator:
+                JSON.parse(
+                    localStorage.getItem("courtfindrAccount")
+                ).name
+
+        };
+
+
+        const existingGames =
+            JSON.parse(
+                localStorage.getItem("courtfindrGames")
+            ) || [];
+
+
+        existingGames.push(game);
+
+
+        localStorage.setItem(
+            "courtfindrGames",
+            JSON.stringify(existingGames)
+        );
+
+
+        alert(
+            "Your FreePlay game has been created!"
+        );
+
+
+        window.location.href =
+            "freeplay.html";
+
+    });
+
+</script>
+</body>
+
+</html>

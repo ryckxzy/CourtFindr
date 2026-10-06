@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Your Plan - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">Home</a>
+
+            <a href="find-court.html">Find a Court</a>
+
+            <a href="freeplay.html">FreePlay</a>
+
+            <a href="#">Facilities</a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="plans-page">
+
+        <div class="plans-header">
+
+            <h1>Choose Your CourtFindr Account</h1>
+
+            <p>
+                Choose the account that fits how you want to use CourtFindr.
+            </p>
+
+        </div>
+
+
+        <div class="plans-container">
+
+
+            <!-- FREE -->
+
+            <div class="plan-card">
+
+                <div class="plan-icon">
+                    👤
+                </div>
+
+                <h2>Free</h2>
+
+                <div class="plan-price">
+                    ₱0
+                </div>
+
+                <p class="plan-description">
+                    For players who want to discover courts and join games.
+                </p>
+
+
+                <h3>What's Included</h3>
+
+                <ul>
+
+                    <li>✓ Player profile</li>
+
+                    <li>✓ Find nearby courts</li>
+
+                    <li>✓ View facility information</li>
+
+                    <li>✓ Join Free Play games</li>
+
+                    <li>✓ Set sports and skill levels</li>
+
+                </ul>
+
+
+                <h3 class="not-included-title">
+                    Not Included
+                </h3>
+
+                <ul class="not-included">
+
+                    <li>✕ Create Free Play games</li>
+
+                    <li>✕ Court booking</li>
+
+                    <li>✕ Player Matching</li>
+
+                    <li>✕ Player messaging</li>
+
+                </ul>
+
+
+                <button
+                    class="plan-button"
+                    onclick="choosePlan('free')">
+
+                    Choose Free
+
+                </button>
+
+            </div>
+
+
+            <!-- PLAY+ -->
+
+            <div class="plan-card featured">
+
+                <div class="plan-badge">
+                    RECOMMENDED FOR PLAYERS
+                </div>
+
+                <div class="plan-icon">
+                    ⭐
+                </div>
+
+                <h2>Play+</h2>
+
+                <div class="plan-price">
+                    ₱99<span>+</span>
+                </div>
+
+                <p class="plan-description">
+                    For players who want the full CourtFindr experience.
+                </p>
+
+
+                <h3>Everything in Free, plus:</h3>
+
+                <ul>
+
+                    <li>✓ Create Free Play games</li>
+
+                    <li>✓ Book courts</li>
+
+                    <li>✓ Player Matching</li>
+
+                    <li>✓ Connect with matched players</li>
+
+                    <li>✓ Messaging with matched players</li>
+
+                </ul>
+
+
+                <h3>
+                    Included
+                </h3>
+
+                <ul>
+
+                    <li>✓ Find nearby courts</li>
+
+                    <li>✓ Join Free Play games</li>
+
+                    <li>✓ Player profile</li>
+
+                    <li>✓ Sports & skill levels</li>
+
+                </ul>
+
+
+                <button
+                    class="plan-button playplus-button"
+                    onclick="choosePlan('playplus')">
+
+                    Choose Play+
+
+                </button>
+
+            </div>
+
+
+            <!-- FACILITY -->
+
+            <div class="plan-card">
+
+                <div class="plan-icon">
+                    🏟️
+                </div>
+
+                <h2>Facility</h2>
+
+                <div class="plan-price facility-price">
+                    Facility Account
+                </div>
+
+                <p class="plan-description">
+                    For sports facilities and court owners.
+                </p>
+
+
+                <h3>What's Included</h3>
+
+                <ul>
+
+                    <li>✓ Facility profile</li>
+
+                    <li>✓ List your courts</li>
+
+                    <li>✓ Add facility information</li>
+
+                    <li>✓ Add court information</li>
+
+                    <li>✓ Manage availability</li>
+
+                    <li>✓ Manage bookings</li>
+
+                </ul>
+
+
+                <h3 class="not-included-title">
+                    Not for Players
+                </h3>
+
+                <ul class="not-included">
+
+                    <li>✕ Player Matching</li>
+
+                    <li>✕ Player profile</li>
+
+                    <li>✕ Join Free Play as a player</li>
+
+                </ul>
+
+
+                <button
+                    class="plan-button"
+                    onclick="choosePlan('facility')">
+
+                    Choose Facility
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+<script>
+
+function choosePlan(plan) {
+
+    localStorage.setItem(
+        "courtfindrPlan",
+        plan
+    );
+
+
+    if (plan === "free") {
+
+        window.location.href =
+            "free-profile.html";
+
+    }
+
+    else if (plan === "playplus") {
+
+        // Payment will be added later
+
+        window.location.href =
+            "playplus-profile.html";
+
+    }
+
+    else if (plan === "facility") {
+
+        window.location.href =
+            "facility-profile.html";
+
+    }
+
+}
+
+</script>
+</body>
+
+</html>

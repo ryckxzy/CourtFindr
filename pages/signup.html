@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="find-court.html">
+                Find a Court
+            </a>
+
+            <a href="freeplay.html">
+                FreePlay
+            </a>
+
+            <a href="#">
+                Facilities
+            </a>
+
+        </nav>
+
+        <div class="auth-buttons">
+
+            <button class="login-btn"
+                    onclick="window.location.href='login.html'">
+                Log In
+            </button>
+
+            <button class="signup-btn">
+                Sign Up
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="auth-page">
+
+        <div class="auth-card">
+
+            <h1>Create Your Account</h1>
+
+            <p>
+                Join CourtFindr and start playing.
+            </p>
+
+
+            <form onsubmit="createAccount(event)">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirm-password">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    
+
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+
+            <p class="auth-switch">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Log In
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+<script>
+
+function createAccount(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim().toLowerCase();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirm-password").value;
+
+
+    if (password !== confirmPassword) {
+
+        alert("Passwords do not match.");
+
+        return;
+
+    }
+
+
+    const account = {
+
+        name: name,
+        email: email,
+        password: password
+
+    };
+
+
+    localStorage.setItem(
+        "courtfindrAccount",
+        JSON.stringify(account)
+    );
+
+
+    // Continue to profile information
+
+    window.location.href =
+        "profile-setup.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

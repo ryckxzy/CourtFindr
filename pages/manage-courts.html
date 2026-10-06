@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Courts - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="find-court.html">
+                Find a Court
+            </a>
+
+            <a href="freeplay.html">
+                FreePlay
+            </a>
+
+            <a href="#">
+                Facilities
+            </a>
+
+        </nav>
+
+        <div class="auth-buttons">
+
+            <button
+                class="login-btn"
+                onclick="window.location.href='facility-profile.html'">
+
+                Profile
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="manage-courts-page">
+
+        <div class="manage-courts-header">
+
+            <div>
+
+                <p class="facility-label">
+                    FACILITY ACCOUNT
+                </p>
+
+                <h1>Manage Courts</h1>
+
+                <p>
+                    Add and manage the courts available at your facility.
+                </p>
+
+            </div>
+
+
+            <button
+                class="facility-action-btn"
+                onclick="showAddCourt()">
+
+                + Add Court
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="add-court-form"
+            class="add-court-card"
+            style="display: none;">
+
+            <h2>Add a Court</h2>
+
+
+            <form onsubmit="addCourt(event)">
+
+                <div class="form-group">
+
+                    <label for="court-name">
+                        Court Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="court-name"
+                        placeholder="e.g. Court 1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="court-sport">
+                        Sport
+                    </label>
+
+                    <select
+                        id="court-sport"
+                        required>
+
+                        <option value="">
+                            Select sport
+                        </option>
+
+                        <option value="Basketball">
+                            Basketball
+                        </option>
+
+                        <option value="Pickleball">
+                            Pickleball
+                        </option>
+
+                        <option value="Tennis">
+                            Tennis
+                        </option>
+
+                        <option value="Volleyball">
+                            Volleyball
+                        </option>
+
+                        <option value="Badminton">
+                            Badminton
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="court-price">
+                        Price per Hour
+                    </label>
+
+                    <input
+                        type="number"
+                        id="court-price"
+                        placeholder="300"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="court-form-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="hideAddCourt()">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="facility-action-btn">
+
+                        Add Court
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <section class="courts-section">
+
+            <h2>Your Courts</h2>
+
+            <div id="courts-list">
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../auth.js"></script>
+
+
+    <script>
+
+    const loggedIn =
+        localStorage.getItem(
+            "courtfindrLoggedIn"
+        );
+
+    const plan =
+        localStorage.getItem(
+            "courtfindrPlan"
+        );
+
+
+    if (
+        loggedIn !== "true" ||
+        plan !== "facility"
+    ) {
+
+        alert(
+            "This page is for Facility accounts."
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    let courts =
+        JSON.parse(
+            localStorage.getItem(
+                "courtfindrCourts"
+            )
+        ) || [];
+
+
+    function showAddCourt() {
+
+        document.getElementById(
+            "add-court-form"
+        ).style.display = "block";
+
+    }
+
+
+    function hideAddCourt() {
+
+        document.getElementById(
+            "add-court-form"
+        ).style.display = "none";
+
+    }
+
+
+    function addCourt(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById(
+                "court-name"
+            ).value.trim();
+
+
+        const sport =
+            document.getElementById(
+                "court-sport"
+            ).value;
+
+
+        const price =
+            document.getElementById(
+                "court-price"
+            ).value;
+
+
+        const newCourt = {
+
+            name: name,
+            sport: sport,
+            price: price
+
+        };
+
+
+        courts.push(newCourt);
+
+
+        localStorage.setItem(
+            "courtfindrCourts",
+            JSON.stringify(courts)
+        );
+
+
+        event.target.reset();
+
+        hideAddCourt();
+
+        displayCourts();
+
+    }
+
+
+    function displayCourts() {
+
+        const courtsList =
+            document.getElementById(
+                "courts-list"
+            );
+
+
+        courtsList.innerHTML = "";
+
+
+        if (courts.length === 0) {
+
+            courtsList.innerHTML = `
+
+                <div class="no-courts">
+
+                    <h3>
+                        No courts added yet
+                    </h3>
+
+                    <p>
+                        Add your first court to get started.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        courts.forEach(function(court, index) {
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "facility-court-card";
+
+
+            card.innerHTML = `
+
+                <div>
+
+                    <h3>
+                        ${court.name}
+                    </h3>
+
+                    <p>
+                        ${court.sport}
+                    </p>
+
+                    <strong>
+                        ₱${court.price}/hour
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="delete-court-btn"
+                    onclick="deleteCourt(${index})">
+
+                    Remove
+
+                </button>
+
+            `;
+
+
+            courtsList.appendChild(card);
+
+        });
+
+    }
+
+
+    function deleteCourt(index) {
+
+        courts.splice(index, 1);
+
+
+        localStorage.setItem(
+            "courtfindrCourts",
+            JSON.stringify(courts)
+        );
+
+
+        displayCourts();
+
+    }
+
+
+    displayCourts();
+
+    </script>
+
+</body>
+
+</html>

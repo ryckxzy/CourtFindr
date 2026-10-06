@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book a Court - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="find-court.html">
+                Find a Court
+            </a>
+
+            <a href="freeplay.html">
+                FreePlay
+            </a>
+
+            <a href="#">
+                Facilities
+            </a>
+
+        </nav>
+
+        <div class="auth-buttons">
+
+            <button class="login-btn">
+                Log In
+            </button>
+
+            <button class="signup-btn">
+                Sign Up
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="booking-page">
+
+        <section class="booking-container">
+
+            <div class="booking-court-info">
+
+    <h1>Book a Court</h1>
+
+    <h2 id="booking-court-name">
+        Court
+    </h2>
+
+    <p id="booking-court-location">
+        Location
+    </p>
+
+    <p id="booking-court-sport">
+        Sport
+    </p>
+
+</div>
+
+<p>
+    Choose a date and time for your court booking.
+</p>
+
+
+            <div class="booking-form">
+
+                <label for="booking-date">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="booking-date"
+                >
+
+
+                <label>
+    Available Times
+</label>
+
+    <div class="booking-times" id="booking-times">
+
+        <button type="button" class="time-slot">
+            9:00 AM
+        </button>
+
+        <button type="button" class="time-slot">
+            10:00 AM
+        </button>
+
+        <button type="button" class="time-slot">
+            11:00 AM
+        </button>
+
+        <button type="button" class="time-slot">
+            1:00 PM
+        </button>
+
+        <button type="button" class="time-slot">
+            2:00 PM
+        </button>
+
+        <button type="button" class="time-slot">
+            3:00 PM
+        </button>
+
+        <button type="button" class="time-slot">
+            6:00 PM
+        </button>
+
+        <button type="button" class="time-slot">
+            7:00 PM
+        </button>
+
+        <button type="button" class="time-slot">
+            8:00 PM
+        </button>
+
+    </div>
+
+    <input
+        type="hidden"
+        id="booking-time"
+>
+
+
+                <button
+                    class="find-games-btn"
+                    onclick="confirmBooking()">
+
+                    Continue
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../auth.js"></script>
+
+    <script>
+    
+    const bookingParams =
+    new URLSearchParams(window.location.search);
+
+
+const courtName =
+    bookingParams.get("court");
+
+const courtLocation =
+    bookingParams.get("location");
+
+const courtSport =
+    bookingParams.get("sport");
+
+
+if (courtName) {
+
+    document.getElementById(
+        "booking-court-name"
+    ).textContent = courtName;
+
+}
+
+
+if (courtLocation) {
+
+    document.getElementById(
+        "booking-court-location"
+    ).textContent =
+        "📍 " + courtLocation;
+
+}
+
+
+if (courtSport) {
+
+    document.getElementById(
+        "booking-court-sport"
+    ).textContent =
+        "🏀 " + courtSport;
+
+}
+
+        function confirmBooking() {
+
+            const loggedIn =
+                localStorage.getItem("courtfindrLoggedIn");
+
+            const plan =
+                localStorage.getItem("courtfindrPlan");
+
+
+            if (loggedIn !== "true") {
+
+                alert(
+                    "Please log in to book a court."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            if (plan !== "playplus") {
+
+                alert(
+                    "Court booking is available to Play+ members."
+                );
+
+                return;
+
+            }
+
+
+            const date =
+                document.getElementById(
+                    "booking-date"
+                ).value;
+
+            const time =
+                document.getElementById(
+                    "booking-time"
+                ).value;
+
+
+            if (!date || !time) {
+
+                alert(
+                    "Please select a date and time."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Booking details saved! Booking confirmation will be added next."
+            );
+
+        }
+
+    </script>
+<script>
+
+const timeSlots =
+    document.querySelectorAll(".time-slot");
+
+timeSlots.forEach(function(slot) {
+
+    slot.addEventListener("click", function() {
+
+        timeSlots.forEach(function(otherSlot) {
+            otherSlot.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+
+        document.getElementById(
+            "booking-time"
+        ).value = this.textContent.trim();
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

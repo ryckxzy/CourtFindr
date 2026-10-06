@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Facility Profile - CourtFindr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+<link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+    <img
+        src="../images/courtfindr-logo.png"
+        alt="CourtFindr"
+    >
+</div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="find-court.html">
+                Find a Court
+            </a>
+
+            <a href="freeplay.html">
+                FreePlay
+            </a>
+
+            <a href="#">
+                Facilities
+            </a>
+
+        </nav>
+
+        <div class="auth-buttons">
+
+            <button
+                class="login-btn"
+                onclick="logout()">
+
+                Log Out
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="facility-profile-page">
+
+        <section class="facility-profile-card">
+
+            <div class="facility-profile-header">
+
+                <div class="facility-icon">
+                    🏟️
+                </div>
+
+                <div>
+
+                    <p class="facility-label">
+                        FACILITY ACCOUNT
+                    </p>
+
+                    <h1 id="facility-name">
+                        Your Facility
+                    </h1>
+
+                    <p id="facility-location">
+                        Your Location
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="facility-info">
+
+    <h2>Facility Information</h2>
+
+    <div class="form-group">
+
+        <label for="facility-name-input">
+            Facility Name
+        </label>
+
+        <input
+            type="text"
+            id="facility-name-input"
+            placeholder="Enter facility name"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="facility-location-input">
+            Location
+        </label>
+
+        <input
+            type="text"
+            id="facility-location-input"
+            placeholder="Enter city or general location"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="facility-email-input">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="facility-email-input"
+            placeholder="Enter facility email"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="facility-contact-input">
+            Contact Number
+        </label>
+
+        <input
+            type="text"
+            id="facility-contact-input"
+            placeholder="Enter contact number"
+        >
+
+    </div>
+
+
+    <button
+        class="facility-action-btn"
+        onclick="saveFacilityInfo()">
+
+        Save Information
+
+    </button>
+
+</div>  
+
+
+                <div class="facility-info-row">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong id="info-location">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="facility-info-row">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong id="info-email">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="facility-info-row">
+
+                    <span>
+                        Contact Number
+                    </span>
+
+                    <strong id="info-contact">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="facility-actions">
+
+                <button
+                    class="facility-action-btn"
+                    onclick="manageCourts()">
+
+                    Manage Courts
+
+                </button>
+
+
+                <button
+                    class="facility-action-btn"
+                    onclick="manageBookings()">
+
+                    Manage Bookings
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../auth.js"></script>
+
+
+    <script>
+
+    const loggedIn =
+        localStorage.getItem(
+            "courtfindrLoggedIn"
+        );
+
+    const plan =
+        localStorage.getItem(
+            "courtfindrPlan"
+        );
+
+
+    if (
+        loggedIn !== "true" ||
+        plan !== "facility"
+    ) {
+
+        alert(
+            "This page is for Facility accounts."
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    const account =
+    JSON.parse(
+        localStorage.getItem(
+            "courtfindrAccount"
+        )
+    );
+
+
+if (account) {
+
+    document.getElementById(
+        "facility-name-input"
+    ).value =
+        account.name || "";
+
+
+    document.getElementById(
+        "facility-location-input"
+    ).value =
+        account.location || "";
+
+
+    document.getElementById(
+        "facility-email-input"
+    ).value =
+        account.email || "";
+
+
+    document.getElementById(
+        "facility-contact-input"
+    ).value =
+        account.contact || "";
+
+}
+
+
+function saveFacilityInfo() {
+
+    const account =
+        JSON.parse(
+            localStorage.getItem(
+                "courtfindrAccount"
+            )
+        ) || {};
+
+
+    account.name =
+        document.getElementById(
+            "facility-name-input"
+        ).value.trim();
+
+
+    account.location =
+        document.getElementById(
+            "facility-location-input"
+        ).value.trim();
+
+
+    account.email =
+        document.getElementById(
+            "facility-email-input"
+        ).value.trim();
+
+
+    account.contact =
+        document.getElementById(
+            "facility-contact-input"
+        ).value.trim();
+
+
+    localStorage.setItem(
+        "courtfindrAccount",
+        JSON.stringify(account)
+    );
+
+
+    alert(
+        "Facility information saved!"
+    );
+
+}
+
+
+    function manageCourts() {
+
+    window.location.href =
+        "manage-courts.html";
+
+    }
+
+
+    function manageBookings() {
+
+        alert(
+            "Booking management will be added next."
+        );
+
+    }
+
+    </script>
+
+</body>
+
+</html>

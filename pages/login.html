@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Log In - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="find-court.html">
+                Find a Court
+            </a>
+
+            <a href="freeplay.html">
+                FreePlay
+            </a>
+
+            <a href="#">
+                Facilities
+            </a>
+
+        </nav>
+
+        <div class="auth-buttons">
+
+            <button class="login-btn">
+                Log In
+            </button>
+
+            <button
+                class="signup-btn"
+                onclick="window.location.href='signup.html'">
+
+                Sign Up
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="auth-page">
+
+        <div class="auth-card">
+
+            <h1>Welcome Back</h1>
+
+            <p>
+                Log in to your CourtFindr account.
+            </p>
+
+
+            <form onsubmit="login(event)">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn">
+
+                    Log In
+
+                </button>
+
+            </form>
+
+
+            <p class="auth-switch">
+
+                Don't have an account?
+
+                <a href="signup.html">
+                    Sign Up
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+<script>
+
+function login(event) {
+
+    event.preventDefault();
+
+
+    const email =
+        document.getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
+
+    const password =
+        document.getElementById("password")
+            .value;
+
+
+    const savedAccount =
+        localStorage.getItem(
+            "courtfindrAccount"
+        );
+
+
+    if (!savedAccount) {
+
+        alert(
+            "No account found. Please sign up first."
+        );
+
+        return;
+
+    }
+
+
+    const account =
+        JSON.parse(savedAccount);
+
+
+    if (
+        email !== account.email ||
+        password !== account.password
+    ) {
+
+        alert(
+            "Incorrect email or password."
+        );
+
+        return;
+
+    }
+
+
+    // Account is correct
+
+    const plan =
+        localStorage.getItem(
+            "courtfindrPlan"
+        );
+        
+localStorage.setItem(
+    "courtfindrLoggedIn",
+    "true"
+);
+
+    if (plan === "playplus") {
+
+        window.location.href =
+            "playplus-profile.html";
+
+    }
+
+    else {
+
+        window.location.href =
+            "free-profile.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

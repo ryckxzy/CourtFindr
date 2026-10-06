@@ -1,0 +1,3353 @@
+:root {
+    --cream: #EBE3D2;
+    --sand: #CCBFA3;
+    --sage: #A4AC86;
+    --olive: #737A5D;
+    --dark-olive: #414833;
+
+    --white: #FFFFFF;
+    --text: #414833;
+    --muted-text: #737A5D;
+    --border: #CCBFA3;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #222222;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {.navbar {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background-color: white;
+
+    border-bottom: 1px solid #eeeeee;
+    width: 100%;
+box-sizing: border-box;
+}
+
+
+/* Logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 105px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+
+/* Navigation */
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #e65f25;
+}
+
+nav .active {
+    border-bottom: 3px solid #8fbe22;
+    padding-bottom: 8px;
+}
+
+
+/* Login / Signup */
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    border: none;
+    border-radius: 25px;
+
+    padding: 10px 22px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #8fbe22;
+    color: white;
+}
+
+.signup-btn {
+    background-color: #ed6825;
+    color: white;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    height: 430px;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.35)
+        ),
+        url("https://images.unsplash.com/photo-1626224583764-f87db24ac4ea");
+
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+}
+
+
+.hero-content {
+
+    position: absolute;
+
+    left: 7%;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+.hero h1 {
+
+    color: white;
+
+    font-size: 55px;
+
+    line-height: 0.95;
+
+    margin-bottom: 30px;
+
+    text-shadow: 2px 2px 5px black;
+}
+
+
+/* Location Search */
+
+.location-search {
+
+    display: flex;
+
+    align-items: center;
+
+    background-color: white;
+
+    width: 480px;
+
+    height: 55px;
+
+    border-radius: 30px;
+
+    padding-left: 20px;
+
+    overflow: hidden;
+}
+
+.location-search span {
+    font-size: 18px;
+}
+
+.location-search input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    padding: 0 15px;
+
+    font-size: 15px;
+}
+
+.location-search button {
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+
+    background-color: #eeeeee;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   SPORTS
+========================= */
+
+.sports-section {
+
+    padding: 35px 6%;
+
+}
+
+.sports-section h2 {
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+}
+
+
+.sports-container {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.sport-card {
+
+    width: 18%;
+
+    height: 130px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition: 0.2s;
+}
+
+
+.sport-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.sport-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
+}
+
+
+.sport-card p {
+
+    margin: 0;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================
+   FEATURE CARDS
+========================= */
+
+.features-section {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    padding: 10px 6% 60px;
+
+}
+
+
+.feature-card {
+
+    border: 1px solid #dddddd;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background-color: white;
+
+}
+
+
+.feature-image {
+
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 70px;
+
+}
+
+
+.map-image {
+
+    background-color: #dfe9d5;
+}
+
+
+.freeplay-image {
+
+    background-color: #d8d1c7;
+}
+
+
+.facility-image {
+
+    background-color: #b9d7e8;
+}
+
+
+.feature-content {
+
+    padding: 20px;
+
+    position: relative;
+}
+
+
+.feature-content h3 {
+
+    margin-top: 0;
+
+    font-size: 20px;
+
+}
+
+
+.feature-content p {
+
+    color: #555555;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+
+    padding-right: 35px;
+
+}
+
+
+.arrow-button {
+
+    position: absolute;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background-color: #d9f0bd;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .location-search {
+        width: 350px;
+    }
+
+    .sports-container {
+        flex-wrap: wrap;
+    }
+
+    .sport-card {
+        width: 30%;
+    }
+
+    .features-section {
+        grid-template-columns: 1fr;
+    }
+
+}
+#map {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+/* =========================
+   COURT DETAILS PAGE
+========================= */
+
+.court-details-page {
+    padding-bottom: 60px;
+}
+
+.court-banner {
+    height: 300px;
+    background-image: url("https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.court-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 50px 8%;
+    color: white;
+}
+
+.court-label {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.court-banner h1 {
+    font-size: 48px;
+    margin: 0 0 10px;
+}
+
+.court-banner p:last-child {
+    font-size: 20px;
+    margin: 0;
+}
+
+.court-details-container {
+    width: 85%;
+    max-width: 1100px;
+    margin: -50px auto 0;
+
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.court-info-card,
+.booking-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.court-info-card h2,
+.booking-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 26px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 16px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row strong {
+    color: #333;
+}
+
+.info-row span {
+    color: #555;
+}
+
+.booking-description {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.booking-card label {
+    display: block;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+}
+
+.booking-card input,
+.booking-card select {
+    width: 100%;
+    padding: 12px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.book-court-btn {
+    width: 100%;
+    margin-top: 25px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #f26522;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.book-court-btn:hover {
+    opacity: 0.9;
+}
+.play-plus-box {
+    background: #f7f7f7;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lock-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.play-plus-box h3 {
+    margin: 5px 0 10px;
+    font-size: 22px;
+}
+
+.play-plus-box p {
+    color: #666;
+    margin: 8px 0;
+}
+
+.play-plus-price {
+    font-weight: bold;
+    color: #f26522 !important;
+    font-size: 18px;
+}
+
+.upgrade-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #f26522;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.upgrade-btn:hover {
+    opacity: 0.9;
+}
+/* Find a Court - Map + Court List */
+
+.court-results {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+#map {
+    flex: 2;
+    height: 550px;
+    border-radius: 12px;
+}
+
+#court-list {
+    flex: 1;
+    height: 550px;
+    overflow-y: auto;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+#court-list h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.court-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.court-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.court-card p {
+    margin: 5px 0;
+}
+
+.court-card button {
+    margin-top: 10px;
+    margin-right: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.search-options {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.location-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 58px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    overflow: visible;
+}
+
+.location-search input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 20px;
+    font-size: 16px;
+    background: transparent;
+    border-radius: 30px 0 0 30px;
+}
+
+.location-search select {
+    height: 40px;
+    border: none;
+    border-left: 1px solid #ddd;
+    outline: none;
+    padding: 0 15px;
+    font-size: 14px;
+    background: white;
+}
+
+.location-search button {
+    height: 42px;
+    margin-right: 8px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 22px;
+    background: #007a3d;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.location-search button:hover {
+    background: #006633;
+}
+
+#location-suggestions {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    overflow: hidden;
+    display: none;
+}
+
+.location-suggestion {
+    padding: 12px 18px;
+    cursor: pointer;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+.location-suggestion:last-child {
+    border-bottom: none;
+}
+
+.location-suggestion:hover {
+    background: #f5f5f5;
+}
+
+.suggestion-name {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.suggestion-address {
+    margin-top: 3px;
+    font-size: 12px;
+    color: #777;
+}
+.search-options {
+    width: 100%;
+    max-width: 1000px;
+    margin: 25px auto;
+}
+
+.location-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 58px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.location-search input {
+    flex: 1;
+    height: 100%;
+    padding: 0 20px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+}
+
+.location-search select {
+    height: 40px;
+    padding: 0 15px;
+    border: none;
+    border-left: 1px solid #ddd;
+    outline: none;
+    background: white;
+    font-size: 14px;
+}
+
+.location-search button {
+    height: 42px;
+    margin-right: 8px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* COURTS + MAP */
+
+.court-results {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+#court-list {
+    width: 35%;
+    order: 1;
+}
+
+#map {
+    width: 65%;
+    height: 550px;
+    order: 2;
+    border-radius: 12px;
+}
+
+/* LOCATION SUGGESTIONS */
+
+#location-suggestions {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.location-suggestion {
+    padding: 12px 18px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.location-suggestion:hover {
+    background: #f5f5f5;
+}
+
+.suggestion-name {
+    font-weight: 600;
+}
+
+.suggestion-address {
+    font-size: 12px;
+    color: #777;
+    margin-top: 3px;
+}
+/* =========================
+   FREE PLAY PAGE
+========================= */
+
+.freeplay-page {
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+/* HERO */
+
+.freeplay-hero {
+    height: 570px;
+    background-image: url("../images/freeplay-page.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+}
+
+/* Hero text */
+
+.freeplay-hero-content {
+    display: none;
+}
+
+
+/* SEARCH CARD */
+
+.game-search {
+    position: relative;
+
+    width: 88%;
+    max-width: 1180px;
+
+    margin: -160px auto 0;
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 40px;
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.18);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+
+    z-index: 5;
+}
+
+
+/* SEARCH FIELDS */
+
+.search-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.search-field label {
+    font-size: 20px;
+    font-weight: 500;
+    color: #666;
+}
+
+.search-field select,
+.search-field input {
+    height: 60px;
+
+    padding: 0 18px;
+
+    border: 1px solid #222;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    background: white;
+}
+
+
+/* FIND GAMES BUTTON */
+
+.find-games-btn {
+    grid-column: 1 / -1;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #006b35;
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.find-games-btn:hover {
+    background: #00552a;
+}
+
+
+/* QUICK FILTERS */
+
+.quick-filters {
+    width: 88%;
+    max-width: 1180px;
+
+    margin: 55px auto 0;
+}
+
+.quick-filters h2 {
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+.filter-buttons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 50px;
+}
+
+.filter {
+    height: 65px;
+
+    border-radius: 30px;
+
+    border: 1px solid #222;
+
+    background: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.filter.active {
+    background: #006b35;
+
+    color: white;
+
+    border-color: #006b35;
+}
+/* =========================
+   AVAILABLE GAMES
+========================= */
+
+.games-page {
+    width: 88%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding-bottom: 60px;
+}
+
+.games-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.games-header h1 {
+    font-size: 38px;
+    margin: 0;
+}
+
+#sort-games {
+    padding: 12px 22px;
+    border: 1px solid #222;
+    border-radius: 25px;
+    background: white;
+    font-size: 16px;
+}
+
+
+/* GAME CARD */
+
+.game-card {
+    display: grid;
+    grid-template-columns: 220px 1fr 150px;
+    align-items: center;
+
+    gap: 30px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+
+/* GAME IMAGE */
+
+.game-image {
+    width: 220px;
+    height: 160px;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+}
+
+
+/* GAME INFORMATION */
+
+.game-info h2 {
+    margin: 0 0 10px;
+
+    font-size: 25px;
+}
+
+.game-info p {
+    margin: 7px 0;
+
+    color: #555;
+
+    font-size: 16px;
+}
+
+.game-info .game-court {
+    font-weight: 600;
+
+    color: #222;
+}
+
+
+/* RIGHT SIDE */
+
+.game-action {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.game-action strong {
+    font-size: 25px;
+
+    color: #006b35;
+}
+
+.game-action span {
+    color: #666;
+
+    margin-bottom: 12px;
+}
+
+
+/* JOIN BUTTON */
+
+.game-action button {
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: #006b35;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.game-action button:hover {
+    background: #00552a;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .games-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .game-card {
+        grid-template-columns: 1fr;
+    }
+
+    .game-image {
+        width: 100%;
+
+        height: 200px;
+    }
+
+    .game-action {
+        align-items: flex-start;
+    }
+
+}
+.location-search {
+    position: relative;
+}
+
+.location-suggestions {
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    background: white;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.15);
+
+    margin-top: 6px;
+
+    overflow: hidden;
+
+    display: none;
+
+    z-index: 20;
+}
+
+.location-suggestion {
+    padding: 14px 18px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.location-suggestion:hover {
+    background: #f3f3f3;
+}
+.location-search {
+    position: relative;
+    width: 100%;
+}
+
+.location-suggestions {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    overflow: hidden;
+
+    display: none;
+
+    z-index: 9999;
+}
+
+.location-suggestion {
+    padding: 14px 18px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #eee;
+}
+
+.location-suggestion:last-child {
+    border-bottom: none;
+}
+
+.location-suggestion:hover {
+    background: #f5f5f5;
+}
+.level-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.level-filter {
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 11;
+}
+.create-freeplay-btn {
+    margin-top: 2px;
+}
+
+.create-freeplay-btn span {
+    display: block;
+    font-size: 12px;
+    margin-top: 3px;
+    opacity: 0.8;
+}
+/* =========================
+   SIGN UP / AUTH PAGE
+========================= */
+
+.auth-page {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background: #f8f8f8;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 520px;
+    background: white;
+    padding: 45px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.auth-card h1 {
+    margin: 0 0 10px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.auth-card > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #007a3d;
+}
+
+.auth-submit-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #007a3d;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-submit-btn:hover {
+    background: #006633;
+}
+
+.auth-switch {
+    margin-top: 25px !important;
+    margin-bottom: 0 !important;
+}
+
+.auth-switch a {
+    color: #007a3d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+/* =========================
+   PLAN SELECTION
+========================= */
+
+.plans-page {
+    min-height: calc(100vh - 100px);
+    padding: 60px 40px;
+    background: #f8f8f8;
+}
+
+.plans-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.plans-header h1 {
+    margin-bottom: 10px;
+    font-size: 36px;
+}
+
+.plans-header p {
+    color: #666;
+    font-size: 17px;
+}
+
+.plans-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+.plan-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-card.featured {
+    border: 2px solid #007a3d;
+    position: relative;
+}
+
+.plan-badge {
+    background: #007a3d;
+    color: white;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.plan-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.plan-card h2 {
+    font-size: 28px;
+    margin: 0 0 10px;
+}
+
+.plan-price {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.plan-price span {
+    font-size: 18px;
+}
+
+.facility-price {
+    font-size: 20px;
+}
+
+.plan-description {
+    color: #666;
+    line-height: 1.5;
+    min-height: 50px;
+}
+
+.plan-card h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-card li {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.not-included-title {
+    color: #777;
+}
+
+.not-included {
+    color: #777;
+}
+
+.plan-button {
+    width: 100%;
+    margin-top: auto;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #007a3d;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.plan-button:hover {
+    background: #006633;
+}
+
+.playplus-button {
+    background: #007a3d;
+}
+@media (max-width: 900px) {
+
+    .plans-container {
+        grid-template-columns: 1fr;
+        max-width: 550px;
+    }
+
+}
+/* =========================
+   COURTFINDR COLOR PALETTE
+   ========================= */
+
+body {
+    background-color: var(--cream);
+    color: var(--dark-olive);
+}
+
+
+/* NAVIGATION */
+
+.navbar {
+    background-color: var(--cream);
+    border-bottom: 1px solid var(--sand);
+}
+
+.logo,
+.logo span {
+    color: var(--dark-olive);
+}
+
+nav a {
+    color: var(--dark-olive);
+}
+
+nav a:hover {
+    color: var(--olive);
+}
+
+nav .active {
+    border-bottom-color: var(--olive);
+}
+
+
+/* LOGIN / SIGN UP */
+
+.login-btn {
+    background-color: var(--dark-olive);
+}
+
+.signup-btn {
+    background-color: var(--olive);
+}
+
+.login-btn:hover,
+.signup-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* GENERAL BORDERS */
+
+.sport-card,
+.feature-card {
+    border-color: var(--sand);
+}
+
+
+/* FEATURE COLORS */
+
+.map-image {
+    background-color: var(--sage);
+}
+
+.freeplay-image {
+    background-color: var(--sand);
+}
+
+.facility-image {
+    background-color: var(--olive);
+}
+
+.arrow-button {
+    background-color: var(--sage);
+}
+
+
+/* COURT DETAILS */
+
+.book-court-btn,
+.upgrade-btn {
+    background: var(--dark-olive);
+}
+
+.book-court-btn:hover,
+.upgrade-btn:hover {
+    background: var(--olive);
+}
+
+.play-plus-price {
+    color: var(--dark-olive) !important;
+}
+
+.play-plus-box {
+    background: var(--sand);
+}
+
+
+/* FIND A COURT */
+
+.location-search button {
+    background: var(--dark-olive);
+}
+
+.location-search button:hover {
+    background: var(--olive);
+}
+
+.location-suggestions {
+    background: white;
+    border-color: var(--sand);
+}
+
+.location-suggestion {
+    border-bottom-color: var(--sand);
+}
+
+.location-suggestion:hover {
+    background: var(--cream);
+}
+
+
+/* FREEPLAY */
+
+.game-search {
+    background: white;
+}
+
+.search-field label {
+    color: var(--dark-olive);
+}
+
+.search-field select,
+.search-field input {
+    border-color: var(--sand);
+}
+
+.find-games-btn {
+    background: var(--dark-olive);
+}
+
+.find-games-btn:hover {
+    background: var(--olive);
+}
+
+.filter {
+    border-color: var(--sand);
+}
+
+.filter.active {
+    background: var(--dark-olive);
+    border-color: var(--dark-olive);
+}
+
+
+/* AVAILABLE GAMES */
+
+.games-page {
+    background: var(--cream);
+}
+
+.game-card {
+    background: white;
+}
+
+.game-info p {
+    color: var(--olive);
+}
+
+.game-info .game-court {
+    color: var(--dark-olive);
+}
+
+.game-action strong {
+    color: var(--dark-olive);
+}
+
+.game-action button {
+    background: var(--dark-olive);
+}
+
+.game-action button:hover {
+    background: var(--olive);
+}
+
+
+/* AUTH PAGES */
+
+.auth-page {
+    background: var(--cream);
+}
+
+.auth-card {
+    background: white;
+}
+
+.auth-card > p {
+    color: var(--olive);
+}
+
+.form-group input,
+.form-group select {
+    border-color: var(--sand);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--olive);
+}
+
+.auth-submit-btn {
+    background: var(--dark-olive);
+}
+
+.auth-submit-btn:hover {
+    background: var(--olive);
+}
+
+.auth-switch a {
+    color: var(--dark-olive);
+}
+
+
+/* PLAN SELECTION */
+
+.plans-page {
+    background: var(--cream);
+}
+
+.plans-header p {
+    color: var(--olive);
+}
+
+.plan-card {
+    background: white;
+}
+
+.plan-card.featured {
+    border-color: var(--olive);
+}
+
+.plan-badge {
+    background: var(--dark-olive);
+}
+
+.plan-description {
+    color: var(--olive);
+}
+
+.plan-button,
+.playplus-button {
+    background: var(--dark-olive);
+}
+
+.plan-button:hover,
+.playplus-button:hover {
+    background: var(--olive);
+}
+.booking-times {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.time-slot {
+    padding: 14px 10px;
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    background: white;
+    color: var(--dark-olive);
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.time-slot:hover {
+    background: var(--cream);
+    border-color: var(--olive);
+}
+
+.time-slot.selected {
+    background: var(--dark-olive);
+    color: white;
+    border-color: var(--dark-olive);
+}
+/* =========================
+   FACILITY PROFILE
+   ========================= */
+
+.facility-profile-page {
+    min-height: calc(100vh - 80px);
+    background: var(--cream);
+    padding: 60px 20px;
+}
+
+.facility-profile-card {
+    max-width: 850px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid var(--sand);
+    border-radius: 16px;
+    padding: 40px;
+}
+
+.facility-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--sand);
+}
+
+.facility-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border-radius: 50%;
+    font-size: 32px;
+}
+
+.facility-label {
+    margin: 0 0 6px;
+    color: var(--olive);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.facility-profile-header h1 {
+    margin: 0;
+    color: var(--dark-olive);
+}
+
+.facility-profile-header p:last-child {
+    margin: 6px 0 0;
+    color: var(--olive);
+}
+
+.facility-info {
+    margin-top: 30px;
+}
+
+.facility-info h2 {
+    color: var(--dark-olive);
+    margin-bottom: 20px;
+}
+
+.facility-info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--sand);
+}
+
+.facility-info-row span {
+    color: var(--olive);
+}
+
+.facility-info-row strong {
+    color: var(--dark-olive);
+    text-align: right;
+}
+
+.facility-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.facility-action-btn {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--dark-olive);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.facility-action-btn:hover {
+    background: var(--olive);
+}
+.manage-courts-page {
+    min-height: calc(100vh - 80px);
+    background: var(--cream);
+    padding: 50px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.manage-courts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.manage-courts-header h1 {
+    margin: 5px 0;
+    color: var(--dark-olive);
+}
+
+.manage-courts-header p {
+    color: var(--olive);
+}
+
+.add-court-card {
+    background: white;
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 35px;
+}
+
+.add-court-card h2 {
+    color: var(--dark-olive);
+    margin-bottom: 25px;
+}
+
+.add-court-card input,
+.add-court-card select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--sand);
+    border-radius: 7px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.court-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    padding: 12px 20px;
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    background: white;
+    color: var(--dark-olive);
+    cursor: pointer;
+}
+
+.courts-section h2 {
+    color: var(--dark-olive);
+    margin-bottom: 20px;
+}
+
+.facility-court-card {
+    background: white;
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.facility-court-card h3 {
+    margin: 0 0 6px;
+    color: var(--dark-olive);
+}
+
+.facility-court-card p {
+    margin: 0 0 8px;
+    color: var(--olive);
+}
+
+.delete-court-btn {
+    padding: 10px 16px;
+    border: 1px solid var(--sand);
+    border-radius: 7px;
+    background: white;
+    color: var(--dark-olive);
+    cursor: pointer;
+}
+
+.delete-court-btn:hover {
+    background: var(--cream);
+}
+
+.no-courts {
+    background: white;
+    border: 1px dashed var(--sand);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+}
+
+.no-courts h3 {
+    color: var(--dark-olive);
+}
+
+.no-courts p {
+    color: var(--olive);
+}
+
+/* =========================================================
+   COURTFINDR — NEW HOMEPAGE VISUAL STYLE
+   Paste this at the VERY BOTTOM of style.css
+   ========================================================= */
+
+
+/* =========================
+   GLOBAL TYPOGRAPHY
+========================= */
+
+:root {
+
+    --cream: #EBE3D2;
+    --sand: #CCBFA3;
+    --sage: #A4AC86;
+    --olive: #737A5D;
+    --dark-olive: #414833;
+
+    --white: #FFFFFF;
+
+    --soft-shadow:
+        0 12px 35px rgba(65, 72, 51, 0.10);
+
+    --strong-shadow:
+        0 18px 45px rgba(65, 72, 51, 0.16);
+
+}
+
+
+body {
+
+    font-family:
+        "DM Sans",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        var(--cream);
+
+    color:
+        var(--dark-olive);
+
+}
+
+
+h1,
+h2,
+h3 {
+
+    font-family:
+        "Plus Jakarta Sans",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+
+    height: 88px;
+
+    padding:
+        0 5%;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border-bottom:
+        1px solid rgba(65, 72, 51, 0.10);
+
+    box-shadow:
+        0 4px 20px rgba(65, 72, 51, 0.05);
+
+    position:
+        relative;
+
+    z-index:
+        1000;
+
+}
+
+
+/* LOGO */
+
+.brand-logo {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    text-decoration:
+        none;
+
+    height:
+        70px;
+
+}
+
+
+.brand-logo img {
+
+    width:
+        145px;
+
+    height:
+        auto;
+
+    display:
+        block;
+
+    object-fit:
+        contain;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.brand-logo:hover img {
+
+    transform:
+        scale(1.03);
+
+}
+
+
+/* NAVIGATION LINKS */
+
+.navbar nav {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        34px;
+
+}
+
+
+.navbar nav a {
+
+    position:
+        relative;
+
+    text-decoration:
+        none;
+
+    color:
+        var(--dark-olive);
+
+    font-size:
+        14px;
+
+    font-weight:
+        600;
+
+    padding:
+        8px 0;
+
+    transition:
+        color 0.2s ease;
+
+}
+
+
+.navbar nav a::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        0;
+
+    height:
+        2px;
+
+    background:
+        var(--olive);
+
+    transition:
+        width 0.2s ease;
+
+}
+
+
+.navbar nav a:hover {
+
+    color:
+        var(--olive);
+
+}
+
+
+.navbar nav a:hover::after,
+.navbar nav a.active::after {
+
+    width:
+        100%;
+
+}
+
+
+.navbar nav a.active {
+
+    color:
+        var(--dark-olive);
+
+}
+
+
+/* AUTH BUTTONS */
+
+.auth-buttons {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+}
+
+
+.auth-buttons button {
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-weight:
+        600;
+
+    border-radius:
+        999px;
+
+    padding:
+        11px 20px;
+
+    transition:
+        all 0.2s ease;
+
+}
+
+
+.login-btn {
+
+    background:
+        transparent;
+
+    color:
+        var(--dark-olive);
+
+    border:
+        1px solid var(--sand) !important;
+
+}
+
+
+.login-btn:hover {
+
+    background:
+        var(--cream);
+
+}
+
+
+.signup-btn {
+
+    background:
+        var(--dark-olive);
+
+    color:
+        white;
+
+}
+
+
+.signup-btn:hover {
+
+    background:
+        var(--olive);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    height:
+        570px;
+
+    background-image:
+        url("images/pickleball-home.jpg");
+
+    background-size:
+        cover;
+
+    background-position:
+        center 58%;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+}
+
+
+/* Soft overlay */
+
+.hero-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(30, 35, 23, 0.72) 0%,
+            rgba(30, 35, 23, 0.50) 40%,
+            rgba(30, 35, 23, 0.12) 100%
+        );
+
+}
+
+
+/* HERO CONTENT */
+
+.hero-content {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    left:
+        7%;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    max-width:
+        650px;
+
+}
+
+
+.hero-eyebrow {
+
+    color:
+        var(--cream);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
+    margin:
+        0 0 18px;
+
+}
+
+
+.hero h1 {
+
+    color:
+        white;
+
+    font-size:
+        clamp(42px, 5vw, 68px);
+
+    line-height:
+        1.02;
+
+    letter-spacing:
+        -2px;
+
+    margin:
+        0 0 20px;
+
+    text-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+
+}
+
+
+.hero-description {
+
+    color:
+        rgba(255,255,255,0.88);
+
+    font-size:
+        17px;
+
+    line-height:
+        1.6;
+
+    max-width:
+        480px;
+
+    margin:
+        0 0 28px;
+
+}
+
+
+
+/* =========================
+   LOCATION SEARCH
+========================= */
+
+.hero .location-search {
+
+    width:
+        520px;
+
+    max-width:
+        100%;
+
+    height:
+        60px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    background:
+        white;
+
+    border:
+        none;
+
+    border-radius:
+        999px;
+
+    padding:
+        6px 6px 6px 20px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.20);
+
+}
+
+
+.hero .location-search input {
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size:
+        14px;
+
+    color:
+        var(--dark-olive);
+
+}
+
+
+.hero .location-icon {
+
+    font-size:
+        18px;
+
+}
+
+
+.hero .location-search button {
+
+    width:
+        auto;
+
+    height:
+        48px;
+
+    padding:
+        0 24px;
+
+    border-radius:
+        999px;
+
+    background:
+        var(--dark-olive);
+
+    color:
+        white;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    border:
+        none;
+
+    transition:
+        all 0.2s ease;
+
+}
+
+
+.hero .location-search button:hover {
+
+    background:
+        var(--olive);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+
+/* =========================
+   SPORTS SECTION
+========================= */
+
+.sports-section {
+
+    padding:
+        80px 6% 55px;
+
+    background:
+        var(--cream);
+
+}
+
+
+.section-heading {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        end;
+
+    margin-bottom:
+        28px;
+
+}
+
+
+.section-eyebrow {
+
+    margin:
+        0 0 7px;
+
+    color:
+        var(--olive);
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2.5px;
+
+}
+
+
+.sports-section h2 {
+
+    margin:
+        0;
+
+    color:
+        var(--dark-olive);
+
+    font-size:
+        32px;
+
+    letter-spacing:
+        -1px;
+
+}
+
+
+
+/* SPORTS CONTAINER */
+
+.sports-container {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap:
+        16px;
+
+}
+
+
+/* SPORT CARD */
+
+.sport-card {
+
+    width:
+        auto;
+
+    height:
+        230px;
+
+    position:
+        relative;
+
+    border:
+        none;
+
+    border-radius:
+        18px;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--sand);
+
+    box-shadow:
+        var(--soft-shadow);
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.sport-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        var(--strong-shadow);
+
+}
+
+
+.sport-card img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform 0.4s ease;
+
+}
+
+
+.sport-card:hover img {
+
+    transform:
+        scale(1.06);
+
+}
+
+
+.sport-card-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        end;
+
+    padding:
+        20px;
+
+    background:
+        linear-gradient(
+            transparent 35%,
+            rgba(30, 35, 23, 0.78)
+        );
+
+}
+
+
+.sport-card-overlay span {
+
+    color:
+        white;
+
+    font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+    font-size:
+        17px;
+
+    font-weight:
+        700;
+
+}
+
+
+
+/* =========================
+   FEATURE SECTION
+========================= */
+
+.features-section {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        22px;
+
+    padding:
+        35px 6% 90px;
+
+    background:
+        var(--cream);
+
+}
+
+
+.feature-card {
+
+    border:
+        1px solid rgba(65,72,51,0.10);
+
+    border-radius:
+        22px;
+
+    overflow:
+        hidden;
+
+    background:
+        white;
+
+    box-shadow:
+        var(--soft-shadow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.feature-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        var(--strong-shadow);
+
+}
+
+
+.feature-image {
+
+    height:
+        220px;
+
+    overflow:
+        hidden;
+
+}
+
+
+.feature-image img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform 0.4s ease;
+
+}
+
+
+.feature-card:hover .feature-image img {
+
+    transform:
+        scale(1.05);
+
+}
+
+
+.feature-content {
+
+    padding:
+        25px;
+
+    min-height:
+        205px;
+
+}
+
+
+.feature-number {
+
+    color:
+        var(--sage);
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+    margin:
+        0 0 10px;
+
+}
+
+
+.feature-content h3 {
+
+    color:
+        var(--dark-olive);
+
+    font-size:
+        22px;
+
+    margin:
+        0 0 10px;
+
+}
+
+
+.feature-content p:not(.feature-number) {
+
+    color:
+        var(--olive);
+
+    line-height:
+        1.6;
+
+    font-size:
+        14px;
+
+    padding-right:
+        35px;
+
+    margin:
+        0;
+
+}
+
+
+.arrow-button {
+
+    width:
+        44px;
+
+    height:
+        44px;
+
+    right:
+        22px;
+
+    bottom:
+        22px;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--dark-olive);
+
+    color:
+        white;
+
+    font-size:
+        19px;
+
+    transition:
+        all 0.2s ease;
+
+}
+
+
+.arrow-button:hover {
+
+    background:
+        var(--olive);
+
+    transform:
+        translateX(3px);
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .navbar nav {
+
+        gap:
+            18px;
+
+    }
+
+
+    .sports-container {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+
+    .sport-card {
+
+        height:
+            210px;
+
+    }
+
+
+    .features-section {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .navbar {
+
+        height:
+            75px;
+
+        padding:
+            0 5%;
+
+    }
+
+
+    .brand-logo img {
+
+        width:
+            115px;
+
+    }
+
+
+    .navbar nav {
+
+        display:
+            none;
+
+    }
+
+
+    .auth-buttons {
+
+        gap:
+            6px;
+
+    }
+
+
+    .auth-buttons button {
+
+        padding:
+            9px 14px;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .hero {
+
+        height:
+            520px;
+
+    }
+
+
+    .hero-content {
+
+        left:
+            7%;
+
+        right:
+            7%;
+
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            42px;
+
+    }
+
+
+    .hero .location-search {
+
+        width:
+            100%;
+
+    }
+
+
+    .sports-section {
+
+        padding:
+            60px 5% 40px;
+
+    }
+
+
+    .sports-container {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .sport-card {
+
+        height:
+            190px;
+
+    }
+
+
+    .features-section {
+
+        padding:
+            25px 5% 60px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .sports-container {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .sport-card {
+
+        height:
+            170px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            37px;
+
+        letter-spacing:
+            -1px;
+
+    }
+
+
+    .hero-description {
+
+        font-size:
+            15px;
+
+    }
+
+}
+/* =========================================
+   FIND A COURT — MATCH HOMEPAGE TYPOGRAPHY
+========================================= */
+
+.find-court-page {
+    font-family: "DM Sans", sans-serif;
+}
+
+.find-court-page h1,
+.find-court-page h2,
+.find-court-page h3,
+.find-court-page h4 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.find-court-page p,
+.find-court-page label,
+.find-court-page input,
+.find-court-page select,
+.find-court-page button,
+.find-court-page a,
+.find-court-page span {
+    font-family: "DM Sans", sans-serif;
+}
+/* =========================================
+   AVAILABLE GAMES — MATCH HOMEPAGE TYPOGRAPHY
+========================================= */
+
+.available-games-page {
+    font-family: "DM Sans", sans-serif;
+}
+
+.available-games-page h1,
+.available-games-page h2,
+.available-games-page h3,
+.available-games-page h4 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.available-games-page p,
+.available-games-page label,
+.available-games-page input,
+.available-games-page select,
+.available-games-page button,
+.available-games-page a,
+.available-games-page span {
+    font-family: "DM Sans", sans-serif;
+}
+/* =========================================
+   FIND A COURT - PAGE LAYOUT FIX
+   ========================================= */
+
+.find-court-page {
+    padding: 32px 6% 50px;
+    box-sizing: border-box;
+}
+
+
+/* Page title */
+.find-court-page h1 {
+    margin: 0 0 8px;
+    padding: 0;
+}
+
+
+/* Page subtitle */
+.find-court-page > p {
+    margin: 0 0 28px;
+}
+
+
+/* Search area */
+.find-court-page .search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+}
+
+
+/* Search bar */
+.find-court-page .search-container form {
+    width: min(850px, 100%);
+    box-sizing: border-box;
+}
+
+
+/* Prevent the search button from being cut off */
+.find-court-page input,
+.find-court-page select,
+.find-court-page button {
+    box-sizing: border-box;
+}
+
+
+/* Main map + nearby courts area */
+.find-court-page .court-results {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Make sure the page never creates
+   unwanted horizontal scrolling */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}   

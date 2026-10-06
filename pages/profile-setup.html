@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Your Information - CourtFindr</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            COURT<span>FINDR</span>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">Home</a>
+
+            <a href="find-court.html">Find a Court</a>
+
+            <a href="freeplay.html">FreePlay</a>
+
+            <a href="#">Facilities</a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="auth-page">
+
+        <div class="auth-card profile-setup-card">
+
+            <h1>Your Information</h1>
+
+            <p>
+                Tell us a little about yourself.
+            </p>
+
+
+            <form onsubmit="continueToPlans(event)">
+
+                <div class="form-group">
+
+                    <label for="profile-name">
+                        Nickname
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profile-name"
+                        placeholder="Enter your nickname"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="profile-age">
+                        Age <span>(Optional)</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="profile-age"
+                        placeholder="Enter your age"
+                        min="1"
+                        max="120"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="profile-city">
+                        City / General Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profile-city"
+                        placeholder="e.g. Santa Rosa, Laguna"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Sports You Play
+                    </label>
+
+                    <div class="sports-selection">
+
+                        <label class="sport-option">
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Basketball">
+                            Basketball
+                        </label>
+
+                        <label class="sport-option">
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Pickleball">
+                            Pickleball
+                        </label>
+
+                        <label class="sport-option">
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Tennis">
+                            Tennis
+                        </label>
+
+                        <label class="sport-option">
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Volleyball">
+                            Volleyball
+                        </label>
+
+                        <label class="sport-option">
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Badminton">
+                            Badminton
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="sport-levels"
+                    class="sport-levels">
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn">
+
+                    Continue
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+<script>
+
+const sportCheckboxes =
+    document.querySelectorAll(
+        'input[name="sports"]'
+    );
+
+const sportLevels =
+    document.getElementById("sport-levels");
+
+
+sportCheckboxes.forEach(function(checkbox) {
+
+    checkbox.addEventListener(
+        "change",
+        updateLevels
+    );
+
+});
+
+
+function updateLevels() {
+
+    sportLevels.innerHTML = "";
+
+    const selectedSports =
+        document.querySelectorAll(
+            'input[name="sports"]:checked'
+        );
+
+
+    selectedSports.forEach(function(sport) {
+
+        const levelGroup =
+            document.createElement("div");
+
+        levelGroup.className =
+            "form-group";
+
+
+        levelGroup.innerHTML = `
+
+            <label>
+                ${sport.value} Level
+            </label>
+
+            <select
+                name="level-${sport.value}"
+                required>
+
+                <option value="">
+                    Select your level
+                </option>
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+
+        `;
+
+
+        sportLevels.appendChild(
+            levelGroup
+        );
+
+    });
+
+}
+
+
+function continueToPlans(event) {
+
+    event.preventDefault();
+
+
+    const selectedSports =
+        document.querySelectorAll(
+            'input[name="sports"]:checked'
+        );
+
+
+    if (selectedSports.length === 0) {
+
+        alert(
+            "Please select at least one sport."
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        document.getElementById("profile-name").value.trim();
+
+    const age =
+        document.getElementById("profile-age").value;
+
+    const city =
+        document.getElementById("profile-city").value.trim();
+
+
+    const sports = [];
+
+
+    selectedSports.forEach(function(sport) {
+
+        const level =
+            document.querySelector(
+                `select[name="level-${sport.value}"]`
+            ).value;
+
+
+        sports.push({
+
+            name: sport.value,
+            level: level
+
+        });
+
+    });
+
+
+    const profile = {
+
+        name: name,
+        age: age,
+        city: city,
+        sports: sports
+
+    };
+
+
+    localStorage.setItem(
+        "courtfindrProfile",
+        JSON.stringify(profile)
+    );
+
+
+    window.location.href =
+        "choose-plan.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
