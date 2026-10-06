@@ -515,7 +515,7 @@
                                         selectedLocation.lng
                                     ],
 
-                                    1
+                                    15
 
                                 );
 
@@ -1144,9 +1144,63 @@ if (nearbyCount === 0) {
            INITIAL LOAD
            ===================================================== */
 
-        showCourts(
-            "All Sports"
+        /* =====================================================
+   INITIAL LOAD FROM HOME PAGE
+   ===================================================== */
+
+const homeParams =
+    new URLSearchParams(window.location.search);
+
+const homeLocation =
+    homeParams.get("location");
+
+const homeSport =
+    homeParams.get("sport");
+
+
+if (homeLocation) {
+
+    document.getElementById(
+        "location-input"
+    ).value = homeLocation;
+
+}
+
+
+if (homeSport) {
+
+    const sportSelect =
+        document.getElementById(
+            "sport-select"
         );
+
+    sportSelect.value = homeSport;
+
+}
+
+
+/*
+ * If Home sent both a location
+ * and a sport, automatically search.
+ */
+
+if (
+    homeLocation &&
+    homeSport
+) {
+
+    searchCourts();
+
+} else {
+
+    /*
+     * Normal Find a Court visit
+     * with no Home-page search.
+     */
+
+    showCourts("All Sports");
+
+}
 
 
 
